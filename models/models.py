@@ -1,11 +1,8 @@
-import joblib
-from sklearn.ensemble import RandomForestClassifier
+import pickle
 
-def train_model(X_train, y_train):
-    model = RandomForestClassifier()
-    model.fit(X_train, y_train)
-    joblib.dump(model, 'models/model.pkl')
-    return model
-
-def load_model(path='models/model.pkl'):
-    return joblib.load(path)
+def load_model_tokenizer(model_path="models/email_classifier.pkl", tokenizer_path="models/tfidf_vectorizer.pkl"):
+    with open(model_path, "rb") as f:
+        model = pickle.load(f)
+    with open(tokenizer_path, "rb") as f:
+        tokenizer = pickle.load(f)
+    return model, tokenizer
