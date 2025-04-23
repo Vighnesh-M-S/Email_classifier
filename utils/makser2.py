@@ -3,7 +3,7 @@ import re
 import json
 from typing import List, Dict, Any
 
-nlp = spacy.load("xx_ent_wiki_sm")
+nlp = spacy.load("en_core_web_sm")
 
 def mask_pii(email_body: str) -> Dict[str, Any]:
     """
@@ -87,11 +87,9 @@ def mask_pii(email_body: str) -> Dict[str, Any]:
     return result
 
 # Example usage
-email_text = """Subject: Problem with Data Analytics Tools 
+email_text = """SSubject: unforeseen crash of the data analysis platform
 
-The data analytics tools are not functioning properly, which is hindering the optimization of investments. 
-There have been instances of unexpected data loss and system crashes, which might be related to outdated software 
-or hardware incompatibility issues. My contact number is +39-06-8899-1122 and email is john.doe@example.com, I,am working at Amazon."""
+The data analysis platform broke off unexpectedly because the memory surface was too small My name is sophia rossi .. I tried to start Laravel 8 and my MacBook Pro again, but the problem retains. I need your support to fix this mistake. You Can Reach Me at janesmith@company.com."""
 
 masked_result = mask_pii(email_text)
 print(json.dumps(masked_result, indent=2))
