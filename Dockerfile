@@ -1,17 +1,26 @@
-# Use a Python 3.8 image
 FROM python:3.8-slim
 
-# Set the working directory
 WORKDIR /app
 
-# Copy the current directory contents into the container
 COPY . /app
 
-# Install dependencies
+RUN apt-get update && apt-get install -y \
+    gcc \
+    g++ \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install build tools and a safe numpy version first
+RUN pip install --upgrade pip setuptools wheel \
+    && pip install numpy==1.24.4
+
+# Pin spaCy to a compatible version
+RUN pip install spacy==3.7.4 \
+    && python -m spacy download en
+
+# Then install other dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Expose port 8000 for FastAPI
 EXPOSE 8000
 
-# Command to run the FastAPI app
 CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]

@@ -3,7 +3,8 @@ from pydantic import BaseModel
 from models.models import load_model_tokenizer
 from utils.preprocessor import clean_and_vectorize
 from utils.masker3 import mask_pii
-# import spacy
+import json
+
 
 router = APIRouter()
 
@@ -17,6 +18,7 @@ class EmailRequest(BaseModel):
 @router.post("/predict")
 def predict(request: EmailRequest) -> dict:
     pii_result = mask_pii(request.email)
+    #print(json.dumps(pii_result, indent=2))
     vector = clean_and_vectorize(pii_result["masked_email"], tokenizer)
     prediction = model.predict(vector)[0]
     

@@ -4,6 +4,10 @@ from nltk.stem import WordNetLemmatizer
 import string
 import re
 
+import os
+os.environ['NLTK_DATA'] = '/app/nltk_data'
+
+import nltk
 nltk.download('stopwords')
 nltk.download('wordnet')
 

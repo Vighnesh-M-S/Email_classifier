@@ -3,7 +3,7 @@ import spacy
 from typing import Dict, Any, List
 
 # Load spaCy model
-nlp = spacy.load("en_core_web_lg")
+nlp = spacy.load("en_core_web_sm")
 
 def mask_pii(text: str) -> Dict[str, Any]:
     """
