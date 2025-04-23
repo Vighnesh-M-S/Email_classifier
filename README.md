@@ -1,2 +1,10 @@
-# Email_classifier
-The goal of this assignment is to design and implement an email classification system for a company's support team. 
+---
+title: "Email Classifier"
+emoji: "📧"
+colorFrom: "green"
+colorTo: "pink"
+sdk: "docker"
+sdk_version: "0.83.0"
+app_file: "app.py"
+pinned: false
+---
