@@ -2,7 +2,7 @@
 # Email Intent Classifier
 
 ![Streamlit App](https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=Streamlit&logoColor=white)
-![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
+
 
 A machine learning application that classifies email intents using Streamlit and Docker.
 
