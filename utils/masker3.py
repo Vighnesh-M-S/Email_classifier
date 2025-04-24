@@ -69,14 +69,9 @@ def mask_pii(text: str) -> Dict[str, Any]:
         "category_of_the_email": category
     }
 
-# Example usage
-sample = """
-Hello, my name is John Doe, and my email is johndoe@example.com.
-My phone is +1 (555) 123-4567, DOB: 01/01/1990.
-Aadhar: 1234 5678 9012, Visa: 4111 1111 1111 1111 (exp 12/24, CVV: 123).
-"""
 
-import json
-result = mask_pii(sample)
 
-print(json.dumps(result, indent=2))
+
+
+
+
