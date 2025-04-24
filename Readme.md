@@ -5,6 +5,7 @@
 
 
 A machine learning application that classifies email intents using Streamlit.
+Report Link : ![Report](https://drive.google.com/file/d/12y5KKNWeJNSkWNvQ4bN-iw2l0iGojT6T/view?usp=sharing)
 
 ## 🚀 Quick Deployment
 
