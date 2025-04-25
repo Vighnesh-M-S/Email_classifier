@@ -23,9 +23,10 @@ if st.button("Analyze"):
         pii_result = mask_pii(email_input)
 
         # Step 2: Predict category
-        masked_text = pii_result["masked_email"]
+        masked_text = pii_result["English_masked"]
         prediction = classifier.predict(masked_text)
         pii_result["category_of_the_email"] = prediction
+        del pii_result["English_masked"]
         # Step 3: Format full output
         # output = {
         #     "input_email_body": email_input,

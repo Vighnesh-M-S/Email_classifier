@@ -1,6 +1,8 @@
 import re
 import spacy
 from typing import Dict, Any, List
+from langdetect import detect
+from deep_translator import GoogleTranslator
 
 # Load spaCy model
 nlp = spacy.load("en_core_web_sm")
@@ -9,7 +11,14 @@ def mask_pii(text: str) -> Dict[str, Any]:
     """
     Enhanced PII masking with JSON output format
     """
-    masked_text = text
+    lang = detect(text)
+    if lang == 'en':
+            #return text
+            masked_text = text
+    else:
+            # Translate to English
+            translated = GoogleTranslator(source=lang, target='en').translate(text)
+            masked_text = translated
     entities = []
     
     def mask_and_record(pattern, label, group=0):
@@ -60,13 +69,29 @@ def mask_pii(text: str) -> Dict[str, Any]:
             })
 
     # Optional: Set category based on simple rule or ML model
-    category = "sensitive_information"
+    category = "Problem"
+    eng_mask = masked_text
 
+
+    # if lang == 'en':
+    #      masked_text = masked_text
+    # else:
+    #      masked_text = GoogleTranslator(source='en', target=lang).translate(masked_text)
+    text2 = text
+    for ent in entities:
+        entity_value = ent['entity']
+        classification = ent['classification']
+        text = text.replace(entity_value, f"[{classification}]")
+    masked_text = text
     return {
-        "input_email_body": text,
+        "input_email_body": text2,
         "list_of_masked_entities": sorted(entities, key=lambda x: x["position"][0]),
         "masked_email": masked_text,
-        "category_of_the_email": category
+        "category_of_the_email": category,
+        "English_masked": eng_mask
+
     }
 
 
+text = "Subject: Unvorhergesehener Absturz der Datenanalyse-Plattform\n\nDie Datenanalyse-Plattform brach unerwartet ab, da die Speicheroberfläche zu gering war My name is Sophia Rossi.. Ich habe versucht, Laravel 8 und meinen MacBook Pro neu zu starten, aber das Problem behält sich bei. Ich benötige Ihre Unterstützung, um diesen Fehler zu beheben. You can reach me at janesmith@company.com."
+print(mask_pii(text))
